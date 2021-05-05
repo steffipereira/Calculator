@@ -19,5 +19,5 @@ body {
   width: 100%;
   height: 100vh;
   background-size: cover;
-  background-image: linear-gradient(to bottom right, rgba(88,24,69,.9), rgba(216,14,91,.9)), url(https://i.pinimg.com/originals/91/b5/cd/91b5cdab51e207263169904b227503b4.jpg);
+  background: linear-gradient(to top left, slategray, skyblue);
 }

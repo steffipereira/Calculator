@@ -8,7 +8,7 @@ const Wrapper = styled.div`
 const Computation = styled.div`
     display: flex;
     justify-content: flex-end;
-    font-size: 1.4rem;
+    font-size: 2rem;
 `
 const Result = styled.div`
     display: flex;

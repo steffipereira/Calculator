@@ -8,36 +8,33 @@ const Calculator = () => {
     equation: '',
     result: ''
   }
-  let newEquation
   const [calculate, setCalculate] = useState(final)
   const handleClick = (e) => {
     const pressedButton = e.target.innerHTML
-    switch (pressedButton) {
-      case 'C':
-        setCalculate(final)
-        break;
-      case 'back':
-        if(calculate.equation) {
-          newEquation = calculate.equation.slice(0, calculate.equation.length-1)
-          setCalculate({ equation: newEquation, result: ''})
-        }
-        break;
-      default:
-        break;
+    if (pressedButton === 'C'){
+      setCalculate(final)
     }
-    if((pressedButton >= 0 && pressedButton <= 9) || pressedButton === '.') {
-      newEquation = calculate.equation
-      newEquation += pressedButton;
-      setCalculate({equation: newEquation, result: calculate.result})
+    else if (pressedButton === 'back') {
+      if(calculate.equation) {
+        const newEquation = calculate.equation.slice(0, calculate.equation.length-1)
+        setCalculate({ equation: newEquation, result: ''})
+      }
+    }
+    else if((pressedButton >= 0 && pressedButton <= 9) || pressedButton === '.') {
+      setCalculate((prev) => {
+        const newEquation = prev.equation + pressedButton
+        return { ...prev, equation: newEquation}
+      })
     } else if (['+', '-', '*', '/', '%'].indexOf(pressedButton) !== -1) {
-        newEquation = calculate.equation
-        newEquation += ' ' + pressedButton + ' '
-        setCalculate({equation: newEquation, result: calculate.result})
+        setCalculate((prev) => {
+          const newEquation = prev.equation + ' ' + pressedButton + ' '
+          return { ...prev, equation: newEquation }
+        })
     } else if (pressedButton === '=') {
       try {
         const evalResult = eval(calculate.equation);
-        const result = Number.isInteger(evalResult)? evalResult : evalResult.toFixed(2);
-        setCalculate({result});
+        const result = Number.isInteger(evalResult) ? evalResult : evalResult.toFixed(2);
+        setCalculate(prev=> ({ ...prev, result }));
       } catch (error) {
         alert('Invalid Mathematical Equation');
       }
